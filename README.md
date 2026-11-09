@@ -1,10 +1,10 @@
-# Laboratorio 5 — Sistema Planetario con Shaders Procedurales
+# Laboratorio 5 
 
 **Gráficas por Computadora (CC2018) · Universidad del Valle de Guatemala**
 
-Un software renderer escrito en Rust dibuja un sistema planetario completo —una estrella, seis
-cuerpos, una luna y dos sistemas de anillos— sin una sola textura. Cada color nace de funciones
-matemáticas: ruido de gradiente, fbm, voronoi, domain warping, rampas de color, fresnel y modelos
+Un software renderer escrito en Rust dibuja un sistema planetario completo (una estrella, seis
+cuerpos, una luna y dos sistemas de anillos) sin una sola textura. Cada color es una función
+matemática: ruido de gradiente, fbm, voronoi, domain warping, rampas de color, fresnel y modelos
 de iluminación. El sistema gira, orbita y se anima en tiempo real.
 
 ![Sistema completo](screenshots/0_sistema_completo.png)
@@ -154,21 +154,6 @@ Optimizaciones aplicadas:
 - **Caché del fondo:** la nebulosa y las estrellas se recalculan solo cuando la cámara se mueve; cada cuadro anima únicamente el centelleo.
 - **Ruido sin ramas:** el hash de una sola ronda y la tabla de gradientes reducen el costo de voronoi y fbm.
 - **Resolución dinámica:** mientras hay movimiento, la resolución interna se ajusta entre 50 % y 100 % para sostener unos 30 FPS. Con la escena quieta el cuadro se dibuja a resolución completa, y `S` siempre guarda a resolución completa.
-
----
-
-## Cumplimiento de la rúbrica
-
-| Criterio | Puntos | Evidencia |
-|----------|-------:|-----------|
-| Creatividad del diseño | 30 | Siete cuerpos con identidad visual propia: paletas coherentes, un punto focal por cuerpo (Gran Tormenta, calderas, auroras, venas bioluminiscentes), halos atmosféricos, corona solar, eclipses y fondo estelar procedural. |
-| Complejidad de shaders (4 capas × 10) | 40 | Cada shader declara al menos cuatro capas que afectan el color (`CAPA 1 … CAPA 4`), descritas en la tabla de cuerpos. |
-| Planetas extra (3 × 10) | 30 | Ignis, Cristalis y Nyx Lumina, además de los tres requeridos (estrella, rocoso y gaseoso). |
-| Sistema de anillos en un gigante gaseoso | 20 | `rings.rs` + `mesh::annulus`: anillos de Aurelia como modelo separado, con bandas finas, divisiones de Cassini, Encke y Keeler (los fragmentos casi vacíos se descartan), variación de color y sombra del planeta. Cristalis suma un segundo sistema de anillos de hielo. |
-| Luna en un planeta rocoso | 20 | `selene.rs` + `mesh::icosphere`: Selene es un modelo propio en órbita inclinada alrededor de Terra Viridis, con cráteres en relieve y eclipses mutuos. |
-| Rotación y traslación (opcional) | — | Rotación axial de cada cuerpo, órbita de la luna y traslación de todos los planetas en la vista de sistema (`0`). |
-
-**Restricciones respetadas**
 - Cero texturas, imágenes, materiales `.mtl` o bibliotecas de carga de imágenes: todo el color sale de `src/shaders/`.
 - Los anillos y la luna usan mallas propias, separadas de `sphere.obj`, con transformación y shader propios.
 - `assets/sphere.obj` es la esfera base que carga el cargador OBJ. El programa la generó con `--generar-esfera` porque el archivo de Canvas no estaba disponible; basta con reemplazarla por la del curso.
