@@ -1,0 +1,24 @@
+[package]
+name = "gc-lab-5"
+version = "0.1.0"
+edition = "2021"
+description = "Laboratorio 5 - Sistema planetario renderizado con shaders procedurales en un software renderer"
+
+[dependencies]
+# Ventana y presentación del framebuffer (copia directa de un buffer u32, sin texturas).
+minifb = "0.27"
+# Matemática estilo GLM (vec3, mat4, look_at, perspective).
+nalgebra-glm = "0.18"
+# Paralelismo por franjas de pantalla para la rasterización.
+rayon = "1"
+# Compresión deflate para escribir capturas PNG (no es una biblioteca de imágenes).
+flate2 = "1"
+crc32fast = "1"
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+codegen-units = 1
+
+[profile.dev]
+opt-level = 3
